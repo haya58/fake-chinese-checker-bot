@@ -31,6 +31,14 @@ func IsNewline(r rune) bool {
 	return false
 }
 
+// IsSpace は与えられた文字(rune)が空白文字であるか判定し、結果を返す
+func IsSpace(r rune) bool {
+	if r == ' ' || r == '\u3000' {
+		return true
+	}
+	return false
+}
+
 // IsDiscordMention は与えられた文字列(string)が Discord の mention であるか判定し、結果を返す
 func IsDiscordMention(s string) bool {
 	mentionreg := regexp.MustCompile(`^<@.*$`)
@@ -49,7 +57,7 @@ func IsAllowedString(s string) bool {
 	for _, r := range rs {
 		// 漢字でない場合、判定除外する文字種であるか確認する
 		if !(IsKanji(r)) {
-			if IsSymbol(r) || IsNewline(r) {
+			if IsSymbol(r) || IsNewline(r) || IsSpace(r) {
 				continue
 			} else {
 				return false

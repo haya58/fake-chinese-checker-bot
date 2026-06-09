@@ -24,6 +24,11 @@ func TestIsAllowedString(t *testing.T) {
 		{"アルファベット+漢字", "abcdEF漢字", false},
 		{"漢字+アルファベット", "漢字abcdEF", false},
 		{"漢字+アルファベット", "漢字abcdEF", false},
+		{"半角空白のみ", "   ", true},
+		{"全角空白のみ", "   ", true},
+		{"漢字+半角空白", "漢字 漢字", true},
+		{"漢字+全角空白", "漢字 漢字", true},
+		{"漢字+記号+空白", "漢字！ 漢字？", true},
 	}
 
 	for _, tt := range tests {
