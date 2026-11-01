@@ -1,0 +1,6 @@
+services:
+  bot:
+    image: ghcr.io/haya58/fake-chinese-checker-bot:main
+    env_file:
+      - .env
+    restart: unless-stopped

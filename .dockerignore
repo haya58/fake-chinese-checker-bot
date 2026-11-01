@@ -1,0 +1,7 @@
+.git/
+.github/
+.env
+compose.yaml
+compose.override.yaml
+README.md
+.gitignore

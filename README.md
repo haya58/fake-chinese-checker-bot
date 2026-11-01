@@ -9,13 +9,25 @@
 - 事前に適切な権限を与えた Discord Botを作成し、動作させたいサーバに招待しておく
 - Token と検知してほしいチャンネルのIDをコピーしておく
 
-### Docker
+### Docker（ghcr.io イメージ利用・推奨）
 ```
-$ mv .env.sample .env
+$ cp .env.sample .env
 
 $ vi .env
 # BOT_TOKEN と CHANNEL_ID を記入
 
-$ docker build -t fake-chinese-check-bot .
-$ docker run -d --rm --name fake-chinese-check-bot fake-chinese-check-bot 
+$ docker compose pull && docker compose up -d
+```
+- イメージ: `ghcr.io/haya58/fake-chinese-checker-bot`（タグはブランチ名・gitタグ・sha の3種。`compose.yaml` は `:main` 参照）
+- イメージは `.github/workflows/build-push-docker-image.yaml` により `linux/amd64` でビルド・pushされる
+
+### Docker（ローカルビルド）
+```
+$ cp .env.sample .env
+
+$ vi .env
+# BOT_TOKEN と CHANNEL_ID を記入
+
+$ docker build -t fake-chinese-checker-bot .
+$ docker run -d --rm --name fake-chinese-checker-bot --env-file .env fake-chinese-checker-bot
 ```
